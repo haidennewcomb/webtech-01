@@ -20,3 +20,109 @@ header.primary{
   text-align:center;
   text-shadow: 1px 1px #000000;
 }
+.visually-hidden:focus,
+.visually-hidden:focus-visible {
+  clip: auto;
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 10px 14px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #ffffff;
+  color: #172635;
+  z-index: 9999;
+  border-radius: 6px;
+}
+
+/* ------------------ Global Styles --------------------- */
+
+body {
+  font-family: "Rubik", sans-serif;
+  margin:0;
+}
+
+header.primary{
+  background-color:#3b6b8b;
+  color:#ffffff;
+  text-align:center;
+  text-shadow:2px 2px #000000;
+  /* Longform */
+  padding-top:40px;
+  padding-right:40px;
+  padding-bottom:40px;
+  padding-left:40px;
+  /* Single Value */
+  padding:40px;
+  /* T/R/B/L */
+  padding: 40px 40px 20px 40px;
+  /* T/B | L/R */
+  padding: 20px 40px;
+}
+
+header.primary a{
+  color:#ffffff;
+  text-decoration:none;
+}
+
+header.primary h1{
+  font-size:2.4rem;
+  margin:0;
+}
+
+header.primary p.subtitle{
+  font-size:1.3rem;
+  margin:10px 0 20px;
+  letter-spacing:.2px;
+}
+
+nav.primary ul{
+  padding:0;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
+  gap:30px;
+}
+
+nav.primary ul li{
+  list-style-type:none;
+  flex:1;
+}
+
+nav.primary ul li a{
+  background-color:rgba(0,0,0,.4);
+  padding: 5px 7.5px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  transition: .5s;
+  display:block;
+}
+
+nav.primary ul li a:hover{
+   background-color:rgba(0,0,0,.8);
+}
+
+#content h2{
+  color:#3b638b;
+  border-bottom:1px dashed #c0c0c0;
+}
+
+#content p{
+  line-height:1.6;
+}
+
+#blog{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  gap:20px;
+}
+
+figure{
+  margin:0;
+}
+
+#blog article.post{
+  box-shadow:0 4px 8px rgba(0,0,0,.6);
+}
