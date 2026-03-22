@@ -1,5 +1,4 @@
-/*  ---------------Box Sizing-----------------  */
-
+/* ---------------Box Sizing----------------- */
 html {
   box-sizing: border-box;
 }
@@ -9,17 +8,49 @@ html {
   box-sizing: inherit;
 }
 
-/* --------------Global Styles----------------- */
-body {
-    background-color: gold;
-    font-family: "Alan Sans", sans-serif;
+/* --------------Responsive Images ---------------- */
+
+img{
+  max-width:100%;
+} 
+/* --------------Utility Classes ---------------- */
+
+.container{
+  max-width:960px;
+  width:80vw;
+  margin: 20px auto;
 }
-header.primary{
-  background:#3B638B;
-  color:#ffffff;
-  text-align:center;
-  text-shadow: 1px 1px #000000;
+
+.img-right{
+  float:right;
+  margin:10px 0 10px 20px;
+  border:1px solid #c0c0c0;
+  padding:10px;
+  max-width:33%;
 }
+
+.img-left{
+  float:left;
+  margin:10px 0 10px 20px;
+  border:1px solid #c0c0c0;
+  padding:10px;
+  max-width:33%;
+}
+
+/* Skip link utility: hidden until focused */
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Make skip link visible when keyboard users tab to it */
 .visually-hidden:focus,
 .visually-hidden:focus-visible {
   clip: auto;
@@ -30,8 +61,8 @@ header.primary{
   position: absolute;
   left: 10px;
   top: 10px;
-  background: #ffffff;
-  color: #172635;
+  background: #ffd700;
+  color: #ffd700;
   z-index: 9999;
   border-radius: 6px;
 }
@@ -39,13 +70,13 @@ header.primary{
 /* ------------------ Global Styles --------------------- */
 
 body {
+  background-color: #ad0737;
   font-family: "Rubik", sans-serif;
   margin:0;
 }
 
 header.primary{
-  background-color:#3b6b8b;
-  color:#ffffff;
+  color:#ffd700;
   text-align:center;
   text-shadow:2px 2px #000000;
   /* Longform */
@@ -62,12 +93,12 @@ header.primary{
 }
 
 header.primary a{
-  color:#ffffff;
+  color:#ffd700;
   text-decoration:none;
 }
 
 header.primary h1{
-  font-size:2.4rem;
+  font-size:2.4em;
   margin:0;
 }
 
@@ -104,7 +135,7 @@ nav.primary ul li a:hover{
 }
 
 #content h2{
-  color:#3b638b;
+  color:#ce2b00;
   border-bottom:1px dashed #c0c0c0;
 }
 
@@ -117,12 +148,49 @@ nav.primary ul li a:hover{
   flex-direction:row;
   justify-content:space-between;
   gap:20px;
-}
-
-figure{
-  margin:0;
+  flex-wrap:wrap;
 }
 
 #blog article.post{
   box-shadow:0 4px 8px rgba(0,0,0,.6);
+  padding:10px;
+  font-size: .8rem;
+}
+
+article.post time{
+ text-transform: uppercase;
+ font-size: .6rem;
+}
+
+
+
+/* Media Queries */
+
+@media screen and (max-width:500px) {
+  
+
+  
+nav.primary ul{
+  flex-direction:column;
+  justify-content:space-around;
+  gap:15px;
+}
+  
+nav.primary ul li{
+  width: 100%;
+}  
+  
+nav.primary a{
+    display:block;
+    text-align:right;
+  margin-top:20px;
+}
+
+aside .widget{
+  flex:1;
+}
+
+aside footer{
+  display:none;
+}
 }
