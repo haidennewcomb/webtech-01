@@ -22,23 +22,5 @@
       <button type="submit">Submit</button>
     </form>
   </div>
-
-  <script>
-    document.getElementById('instructionsForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const age = document.getElementById('age').value;
-
-      // Simple validation: if name is not 'John' or email not 'john@example.com' or age not 25
-      if (name !== 'John' || email !== 'john@example.com' || age != 25) {
-        alert('Information is incorrect');
-        window.location.href = 'login.html';
-      } else {
-        alert('Information is correct!');
-        // Perhaps redirect to another page or stay
-      }
-    });
-  </script>
 </body>
 </html>
