@@ -1,28 +1,19 @@
 <!doctype html>
-
 <html lang="en">
 <head>
-  <title>My First Web Page</title>
   <meta charset="utf-8" />
-  <meta name="description" content="Keyword rich explanation of the site's purpose" />
-  <!-- Keywords Metatag is no longer necessary -->
-  <meta name="keywords" content="UALR, UA Little Rock" />
-  <meta name="author" content="Haiden Newcomb" />
-</head>
-  <meta charset="utf-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IFSC 11003 - Web Technologies | Haiden Newcomb</title>
-  <meta name="description" content="Keyword Rich Description">
-  <meta name="author" content="Haiden Newcomb">
-
+  <meta name="description" content="Keyword rich explanation of the site's purpose" />
+  <meta name="author" content="Haiden Newcomb" />
   <link rel="stylesheet" href="style.css">
-
+</head>
 <body>
   <h1>Haiden Newcomb</h1>
   <nav>
     <ul> 
-      <li><a href="prototype/index.html">Haiden's Prototype Assignment</a></li>
-      <li><a href="prototype/prototype/index.html">Haiden's Prototype Dcoument</a></li>
+      <li><a href="prototype/prototype/index.html">Haiden's Prototype Assignment</a></li>
+      <li><a href="prototype/prototype/index.html">Haiden's Prototype Document</a></li>
       <li><a href="inde.html">Prototype Document</a></li>
       <li><a href="css-grid-lab/grid-two-col-equal.html">Grid Two Col Equal</a></li>
       <li><a href="css-grid-lab/grid-two-col-left.html">Grid Two Col Left</a></li>
@@ -33,14 +24,37 @@
   </nav>
 
   <script>
-    const bgImage = localStorage.getItem('backgroundImage');
-    if (bgImage) {
-      document.body.style.backgroundImage = `url(${bgImage})`;
+    function applyBackground(imageUrl) {
+      document.body.style.backgroundImage = `url(${imageUrl})`;
       document.body.style.backgroundSize = 'cover';
       document.body.style.backgroundAttachment = 'fixed';
       document.body.style.backgroundPosition = 'center';
       document.body.style.backgroundRepeat = 'no-repeat';
+      localStorage.setItem('backgroundImage', imageUrl);
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedImage = localStorage.getItem('backgroundImage');
+      if (savedImage) {
+        applyBackground(savedImage);
+      }
+
+      const processBtn = document.getElementById('processBtn');
+      const fileInput = document.getElementById('imageInput');
+      processBtn.addEventListener('click', function() {
+        const file = fileInput.files[0];
+        if (!file) {
+          alert('Please select an image file.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          applyBackground(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
   </script>
 </body>
 </html>
