@@ -21,6 +21,19 @@
   </div>
 
   <script>
+    const path = window.location.pathname.slice(1);
+    const key = 'backgroundImage_' + path;
+    const bgImage = localStorage.getItem(key);
+    if (bgImage) {
+      document.body.style.backgroundImage = `url(${bgImage})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+    }
+  </script>
+
+  <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const username = document.getElementById('username').value;

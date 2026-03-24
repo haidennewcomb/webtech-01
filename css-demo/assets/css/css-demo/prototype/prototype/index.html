@@ -252,11 +252,12 @@
       document.body.style.backgroundAttachment = 'fixed';
       document.body.style.backgroundPosition = 'center';
       document.body.style.backgroundRepeat = 'no-repeat';
-      localStorage.setItem('backgroundImage', imageUrl);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      const savedImage = localStorage.getItem('backgroundImage');
+      const path = window.location.pathname.slice(1);
+      const key = 'backgroundImage_' + path;
+      const savedImage = localStorage.getItem(key);
       if (savedImage) {
         applyBackground(savedImage);
       }
