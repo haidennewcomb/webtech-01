@@ -61,6 +61,37 @@
   </div>
 
   <script>
+    function applyBackground(imageUrl) {
+      const preview = document.getElementById('preview');
+      const body = document.body;
+
+      const backgroundStyle = {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+
+      Object.assign(preview.style, backgroundStyle);
+      Object.assign(body.style, backgroundStyle);
+      preview.style.minHeight = '100vh';
+      preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
+
+      const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
+      document.getElementById('cssCode').textContent = cssCode;
+      document.getElementById('code').style.display = 'block';
+
+      localStorage.setItem('backgroundImage', imageUrl);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedImage = localStorage.getItem('backgroundImage');
+      if (savedImage) {
+        applyBackground(savedImage);
+      }
+    });
+
     document.getElementById('processBtn').addEventListener('click', function() {
       const fileInput = document.getElementById('imageInput');
       const file = fileInput.files[0];
@@ -72,24 +103,7 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         const imageUrl = e.target.result;
-        
-        // Set as background
-        const preview = document.getElementById('preview');
-        preview.style.backgroundImage = `url(${imageUrl})`;
-        preview.style.backgroundSize = 'cover';
-        preview.style.backgroundAttachment = 'fixed';
-        preview.style.backgroundPosition = 'center';
-        preview.style.backgroundRepeat = 'no-repeat';
-        preview.style.minHeight = '100vh';
-        preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
-
-        // Save to localStorage
-        localStorage.setItem('backgroundImage', imageUrl);
-
-        // Generate CSS code
-        const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
-        document.getElementById('cssCode').textContent = cssCode;
-        document.getElementById('code').style.display = 'block';
+        applyBackground(imageUrl);
       };
       reader.readAsDataURL(file);
     });
