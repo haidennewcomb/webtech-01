@@ -21,31 +21,44 @@
   </div>
 
   <script>
-    const path = window.location.pathname.slice(1);
-    const key = 'backgroundImage_' + path;
-    const bgImage = localStorage.getItem(key);
-    if (bgImage) {
-      document.body.style.backgroundImage = `url(${bgImage})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundAttachment = 'fixed';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundRepeat = 'no-repeat';
+    function applyBackground(imageUrl) {
+      const preview = document.getElementById('preview');
+      const bodyStyles = {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+      Object.assign(document.body.style, bodyStyles);
+      Object.assign(preview.style, bodyStyles);
+      preview.style.minHeight = '100vh';
+      preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
+
+      const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
+      document.getElementById('cssCode').textContent = cssCode;
+      document.getElementById('code').style.display = 'block';
     }
-  </script>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      // Simple login validation
-      if (username === 'admin' && password === 'password') {
-        alert('Login successful!');
-        // Redirect or do something
-      } else {
-        alert('Invalid credentials');
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedImage = localStorage.getItem('backgroundImage');
+      if (savedImage) {
+        applyBackground(savedImage);
       }
+    });
+
+    document.getElementById('processBtn').addEventListener('click', function() {
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Please select an image file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        applyBackground(e.target.result);
+      };
+      reader.readAsDataURL(file);
     });
   </script>
 </body>

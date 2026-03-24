@@ -11,12 +11,8 @@
   <link rel="stylesheet" href="style.css">
   
 </head>
-<body>
-  <nav>
-    <div class="processor-preview" id="preview">
-      <p>Preview appears here after processing</p>
-    </div>
 
+<body>
     <div class="processor-code" id="code" style="display: none;">
       <h3>CSS Code to add to your stylesheet</h3>
       <code id="cssCode"></code>
@@ -219,9 +215,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      const path = window.location.pathname.slice(1);
-      const key = 'backgroundImage_' + path;
-      const savedImage = localStorage.getItem(key);
+      const savedImage = localStorage.getItem('backgroundImage');
       if (savedImage) {
         applyBackground(savedImage);
       }

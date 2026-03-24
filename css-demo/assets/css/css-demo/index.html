@@ -43,9 +43,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      const path = window.location.pathname.slice(1);
-      const key = 'backgroundImage_' + path;
-      const savedImage = localStorage.getItem(key);
+      const savedImage = localStorage.getItem('backgroundImage');
       if (savedImage) {
         applyBackground(savedImage);
       }
