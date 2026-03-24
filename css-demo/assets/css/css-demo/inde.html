@@ -9,8 +9,54 @@
   <meta name="author" content="Haiden Newcomb" />
 
   <link rel="stylesheet" href="style.css">
+  <style>
+    .processor-container {
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      background: #fafafa;
+      font-family: Arial, sans-serif;
+    }
+    .processor-container input[type="file"],
+    .processor-container button {
+      margin: 0.5rem 0;
+    }
+    .processor-preview {
+      margin-top: 1rem;
+      min-height: 180px;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      background: #fff;
+      position: relative;
+    }
+    .processor-code {
+      margin-top: 1rem;
+      background: #f4f4f4;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
+  <section class="processor-container" aria-label="Image processor">
+    <h1>Image Processor (persistent)</h1>
+    <p>Upload an image, then refresh/close/reopen to keep it as body background.</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <button id="processBtn">Process Image</button>
+
+    <div class="processor-preview" id="preview">
+      <p>Preview appears here after processing</p>
+    </div>
+
+    <div class="processor-code" id="code" style="display: none;">
+      <h3>CSS Code to add to your stylesheet</h3>
+      <code id="cssCode"></code>
+    </div>
+  </section>
+
   <main>
     <header class="primary">
       <h1>Prototype HTML Document Example</h1>
@@ -185,5 +231,48 @@
       <p>&copy; 2026 Haiden Newcomb</p>
     </footer>
   </main>
+
+  <script>
+    function applyBackground(imageUrl) {
+      const preview = document.getElementById('preview');
+      const bodyStyles = {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+      Object.assign(document.body.style, bodyStyles);
+      Object.assign(preview.style, bodyStyles);
+      preview.style.minHeight = '100vh';
+      preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
+
+      const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
+      document.getElementById('cssCode').textContent = cssCode;
+      document.getElementById('code').style.display = 'block';
+      localStorage.setItem('backgroundImage', imageUrl);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedImage = localStorage.getItem('backgroundImage');
+      if (savedImage) {
+        applyBackground(savedImage);
+      }
+    });
+
+    document.getElementById('processBtn').addEventListener('click', function() {
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Please select an image file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        applyBackground(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
 </body>
 </html>
