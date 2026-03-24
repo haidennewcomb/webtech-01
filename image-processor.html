@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Processor</title>
@@ -14,15 +13,8 @@
       max-width: 600px;
       margin: 0 auto;
     }
-    .image-set {
+    input[type="file"] {
       margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .image-set label, .image-set select, .image-set input {
-      display: block;
-      margin: 5px 0;
     }
     button {
       padding: 10px 20px;
@@ -53,278 +45,53 @@
 <body>
   <div class="container">
     <h1>Image Processor</h1>
-    <p>Upload images and assign them to different HTML files. Each image will be applied as a persistent background for the selected file.</p>
-    
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
+    <p>Upload an image to process it as a background for your website.</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <button id="processBtn">Process Image</button>
+
+    <div class="preview" id="preview">
+      <p>Preview will appear here after processing.</p>
     </div>
 
-    <div class="image-set">
-      <label for="htmlSelect2">Select HTML file:</label>
-      <select id="htmlSelect2">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput2" accept="image/*">
+    <div class="code" id="code" style="display: none;">
+      <h3>CSS Code to Add to index.html</h3>
+      <p>Add this to your &lt;style&gt; tag or CSS file:</p>
+      <code id="cssCode"></code>
     </div>
+  </div>
 
-    <div class="image-set">
-      <label for="htmlSelect3">Select HTML file:</label>
-      <select id="htmlSelect3">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput3" accept="image/*">
-    </div>
-
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <div class="image-set">
-      <label for="htmlSelect1">Select HTML file:</label>
-      <select id="htmlSelect1">
-        <option value="css-demo/assets/css/index.html">css-demo/assets/css/index.html</option>
-        <option value="css-demo/assets/css/css-demo/processing-script(1).html">css-demo/assets/css/css-demo/processing-script(1).html</option>
-        <option value="css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-        <option value="css-demo/assets/css/css-demo/inde.html">css-demo/assets/css/css-demo/inde.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-stacked.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-left.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-equal.html</option>
-        <option value="css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html">css-demo/assets/css/css-demo/css-grid-lab/grid-two-col-right.html</option>
-        <option value="css-demo/assets/css/css-demo/index.html">css-demo/assets/css/css-demo/index.html</option>
-        <option value="css-demo/assets/css/css-demo/Instructions.html">css-demo/assets/css/css-demo/Instructions.html</option>
-        <option value="css-demo/assets/css/css-demo/login.html">css-demo/assets/css/css-demo/login.html</option>
-        <option value = "css-demo/assets/css/css-demo/prototype/prototype/index.html">css-demo/assets/css/css-demo/prototype/prototype/index.html</option>
-      </select>
-      <input type="file" id="imageInput1" accept="image/*">
-    </div>
-
-    <button id="processBtn">Process Images</button>
   <script>
-    function applyBackground(imageUrl) {
-      document.body.style.backgroundImage = `url(${imageUrl})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundAttachment = 'fixed';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundRepeat = 'no-repeat';
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const path = window.location.pathname.slice(1);
-      const key = 'backgroundImage_' + path;
-      const savedImage = localStorage.getItem(key);
-      if (savedImage) {
-        applyBackground(savedImage);
-      }
-    });
-
     document.getElementById('processBtn').addEventListener('click', function() {
-      const sets = [
-        { select: 'htmlSelect1', input: 'imageInput1' },
-        { select: 'htmlSelect2', input: 'imageInput2' },
-        { select: 'htmlSelect3', input: 'imageInput3' }
-      ];
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Please select an image file.');
+        return;
+      }
 
-      sets.forEach(set => {
-        const fileInput = document.getElementById(set.input);
-        const file = fileInput.files[0];
-        if (file) {
-          const selectedFile = document.getElementById(set.select).value;
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const imageUrl = e.target.result;
-            applyBackground(imageUrl);
-            const key = 'backgroundImage_' + selectedFile;
-            localStorage.setItem(key, imageUrl);
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageUrl = e.target.result;
+        
+        // Set as background
+        const preview = document.getElementById('preview');
+        preview.style.backgroundImage = `url(${imageUrl})`;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundAttachment = 'fixed';
+        preview.style.backgroundPosition = 'center';
+        preview.style.backgroundRepeat = 'no-repeat';
+        preview.style.minHeight = '100vh';
+        preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
+
+        // Save to localStorage
+        localStorage.setItem('backgroundImage', imageUrl);
+
+        // Generate CSS code
+        const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
+        document.getElementById('cssCode').textContent = cssCode;
+        document.getElementById('code').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
     });
   </script>
 </body>
