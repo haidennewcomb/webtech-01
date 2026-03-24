@@ -244,6 +244,17 @@
   <footer class="primary">
     <p>&copy; 2026 Haiden Newcomb</p>
   </footer>
+
+  <script>
+    const bgImage = localStorage.getItem('backgroundImage');
+    if (bgImage) {
+      document.body.style.backgroundImage = `url(${bgImage})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+    }
+  </script>
 </body>
 
 </html>
