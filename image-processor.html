@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Processor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    input[type="file"] {
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .preview {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      min-height: 200px;
+      position: relative;
+    }
+    .code {
+      margin-top: 20px;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Processor</h1>
+    <p>Upload an image to process it as a background for your website.</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <button id="processBtn">Process Image</button>
+
+    <div class="preview" id="preview">
+      <p>Preview will appear here after processing.</p>
+    </div>
+
+    <div class="code" id="code" style="display: none;">
+      <h3>CSS Code to Add to index.html</h3>
+      <p>Add this to your &lt;style&gt; tag or CSS file:</p>
+      <code id="cssCode"></code>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('processBtn').addEventListener('click', function() {
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Please select an image file.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageUrl = e.target.result;
+        
+        // Set as background
+        const preview = document.getElementById('preview');
+        preview.style.backgroundImage = `url(${imageUrl})`;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundAttachment = 'fixed';
+        preview.style.backgroundPosition = 'center';
+        preview.style.backgroundRepeat = 'no-repeat';
+        preview.style.minHeight = '100vh';
+        preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
+
+        // Save to localStorage
+        localStorage.setItem('backgroundImage', imageUrl);
+
+        // Generate CSS code
+        const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
+        document.getElementById('cssCode').textContent = cssCode;
+        document.getElementById('code').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
