@@ -11,14 +11,13 @@
   <link rel="stylesheet" href="style.css">
   
 </head>
-
 <body>
-    <div class="processor-code" id="code" style="display: none;">
-      <h3>CSS Code to add to your stylesheet</h3>
-      <code id="cssCode"></code>
-    </div>
-  </section>
-
+  <nav>
+    <ul>
+      <li><a href="https://ualr.edu" target="_blank" title="Provide a more verbose description">Absolute Link</a></li>
+      <li><a href="pages/docs/about.html" download>Relative Link</a></li>
+      <li><a href="https://ualr.edu#footer" target="_blank">Anchor Link</a></li>
+      <li><a href="mailto:
   <main>
     <header class="primary">
       <h1>Prototype HTML Document Example</h1>
@@ -212,6 +211,7 @@
       const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
       document.getElementById('cssCode').textContent = cssCode;
       document.getElementById('code').style.display = 'block';
+      localStorage.setItem('backgroundImage', imageUrl);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
