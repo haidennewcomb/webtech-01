@@ -9,44 +9,10 @@
   <meta name="author" content="Haiden Newcomb" />
 
   <link rel="stylesheet" href="style.css">
-  <style>
-    .processor-container {
-      max-width: 640px;
-      margin: 0 auto 1.5rem;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      background: #fafafa;
-      font-family: Arial, sans-serif;
-    }
-    .processor-container input[type="file"],
-    .processor-container button {
-      margin: 0.5rem 0;
-    }
-    .processor-preview {
-      margin-top: 1rem;
-      min-height: 180px;
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      background: #fff;
-      position: relative;
-    }
-    .processor-code {
-      margin-top: 1rem;
-      background: #f4f4f4;
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      white-space: pre-wrap;
-      font-family: monospace;
-    }
-  </style>
+  
 </head>
 <body>
-  <section class="processor-container" aria-label="Image processor">
-    <h1>Image Processor (persistent)</h1>
-    <p>Upload an image, then refresh/close/reopen to keep it as body background.</p>
-    <input type="file" id="imageInput" accept="image/*">
-    <button id="processBtn">Process Image</button>
-
+  <nav>
     <div class="processor-preview" id="preview">
       <p>Preview appears here after processing</p>
     </div>

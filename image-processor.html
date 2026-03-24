@@ -62,26 +62,11 @@
 
   <script>
     function applyBackground(imageUrl) {
-      const preview = document.getElementById('preview');
-      const body = document.body;
-
-      const backgroundStyle = {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      };
-
-      Object.assign(preview.style, backgroundStyle);
-      Object.assign(body.style, backgroundStyle);
-      preview.style.minHeight = '100vh';
-      preview.innerHTML = '<p>Image applied as background. Scroll to see it follow.</p>';
-
-      const cssCode = `body {\n  background-image: url('${imageUrl}');\n  background-size: cover;\n  background-attachment: fixed;\n  background-position: center;\n  background-repeat: no-repeat;\n}`;
-      document.getElementById('cssCode').textContent = cssCode;
-      document.getElementById('code').style.display = 'block';
-
+      document.body.style.backgroundImage = `url(${imageUrl})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
       localStorage.setItem('backgroundImage', imageUrl);
     }
 
@@ -102,8 +87,7 @@
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        const imageUrl = e.target.result;
-        applyBackground(imageUrl);
+        applyBackground(e.target.result);
       };
       reader.readAsDataURL(file);
     });
