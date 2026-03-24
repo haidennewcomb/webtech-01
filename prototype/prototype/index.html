@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -243,6 +244,40 @@
   <footer class="primary">
     <p>&copy; 2026 Haiden Newcomb</p>
   </footer>
+
+  <script>
+    function applyBackground(imageUrl) {
+      document.body.style.backgroundImage = `url(${imageUrl})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+      localStorage.setItem('backgroundImage', imageUrl);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedImage = localStorage.getItem('backgroundImage');
+      if (savedImage) {
+        applyBackground(savedImage);
+      }
+
+      const processBtn = document.getElementById('processBtn');
+      const fileInput = document.getElementById('imageInput');
+      processBtn.addEventListener('click', function() {
+        const file = fileInput.files[0];
+        if (!file) {
+          alert('Please select an image file.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          applyBackground(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
 </body>
 
 </html>
