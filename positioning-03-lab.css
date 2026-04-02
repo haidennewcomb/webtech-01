@@ -1,0 +1,72 @@
+/* ---------------Box Sizing----------------- */
+    html {
+      box-sizing: border-box;
+    }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    body {
+      background-color: #ECECEC;
+      font-weight: bold;
+      font-family: Tahoma, Geneva, sans-serif;
+      color: #FFF;
+      text-align: center;
+      line-height: 24px;
+    }
+
+#wrapper {
+  width: 600px;
+  margin: 100px auto;
+  padding: 40px;
+  background: #eee;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+#navy {
+  background-color: #001f3f;
+  width: 120px;
+  height: 120px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#teal {
+  background-color: #39CCCC;
+  width: 120px;
+  height: 120px;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+#blue {
+  background-color: #0074D9;
+  width: 120px;
+  height: 120px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#aqua {
+  background-color: #7FDBFF;
+  width: 120px;
+  height: 120px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+#footer {
+  width: 150px;
+  height: 150px;
+  background: #666;
+  margin: 0 auto;
+  color: white;
+  line-height: 150px;
+  font-weight: bold;
+}
